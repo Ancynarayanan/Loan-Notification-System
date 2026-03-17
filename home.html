@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>SMS Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+
+.card{
+width:420px;
+padding:50px;
+border-radius:16px;
+text-align:center;
+background:rgba(255,255,255,0.08);
+backdrop-filter: blur(15px);
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+color:white;
+}
+
+h1{
+font-size:30px;
+margin-bottom:10px;
+font-weight:600;
+}
+
+.subtitle{
+opacity:0.8;
+margin-bottom:40px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:14px;
+margin:15px 0;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+text-decoration:none;
+}
+
+.admin{
+background: #28a745;
+color:white;
+}
+
+.admin:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.team{
+background:#00c6ff;
+color:white;
+}
+
+.team:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.footer{
+margin-top:35px;
+font-size:12px;
+opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>SMS Portal</h1>
+<div class="subtitle">Secure Communication System</div>
+
+<a href="{% url 'admin_login' %}" class="btn admin">
+Admin Login
+</a>
+
+<a href="{% url 'team_login' %}" class="btn team">
+Team Leader Login
+</a>
+
+<div class="footer">
+© 2026 SMS Portal
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="csrf-token" content="{{ csrf_token }}">
+<title>PRINCE GROUP - Loan Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    font-family: "Times New Roman", serif, sans-serif;
+}
+body {
+    background:#f5f5f5;
+    font-size: 17px;
+}
+/* 🔹 NAVBAR */
+.navbar {
+    background: skyblue;
+    color: black;
+    border: 1px solid black; /* ✅ correct */
+    padding: 10px 25px;   /* 🔥 little compact */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* TITLE */
+.navbar h2 {
+    margin: 0;
+    font-size: 18px;   /* 🔥 balanced size */
+    font-weight: 600;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    background: #ff4d4d;
+    color: #fff;
+
+    padding: 6px 12px;   /* 🔥 compact */
+    border-radius: 5px;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+/* HOVER */
+.logout-btn:hover {
+    background: #e60000;
+    transform: translateY(-1px); /* 🔥 small effect */
+}
+
+/* CLICK */
+.logout-btn:active {
+    transform: scale(0.96);
+}
+
+.form-box {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    border: 2px solid #000;
+    background: skyblue;
+}
+.logo { text-align: center; margin-bottom: 10px; }
+.logo img { height: 75px; }
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+label { font-weight: bold; }
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button:hover { background: #333; }
+
+    .form-actions {
+    display: flex;
+    justify-content: space-between; /* left-right split */
+    margin-top: 20px;
+}
+
+.btn-clear {
+    background: #555;
+    color: #fff;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-clear:hover {
+    background: #333;
+}
+
+.btn-submit {
+    background: #000;
+    color: #fff;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #333;
+}
+
+</style>
+</head>
+<body>
+{% load static %}
+
+<!-- 🔹 Navbar with Logout -->
+<div style="text-align:right; padding:10px;">
+<a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+</div>
+<div class="form-box">
+    <div class="logo"><img src="{% static 'logo.png' %}"></div>
+    <h2>Messaging Portal</h2>
+
+<div class="form-row">
+<label>Name:</label>
+<input type="text" id="name" placeholder="Enter Name"  onchange="updatePreview()"></div>
+
+
+<div class="form-row">
+<label>Name (Tamil):</label>
+<input type="text" id="nameTamil" placeholder="தமிழில் பெயர்"></div>
+
+    <div class="form-row">
+        <label>Sub Register Office:</label>
+        <select id="branch">
+            <option value="">Select Branch</option>
+            <option value="Kollemcode|8939258163|pricegroupkollemcode@gmail.com|https://maps.app.goo.gl/wFCG76S7HX563uyQ8">Kollemcode</option>
+            <option value="Palugal|9361073196|pricegrouppalugal@gmail.com|https://maps.app.goo.gl/Z8L3jBfWgeWbN2DN7">Palugal</option>
+            <option value="Arumanai|8220394178|pricegrouparumanai@gmail.com|">Arumanai</option>
+            <option value="Marthandam|8870404178|pricegroupmarthandam@gmail.com|https://maps.app.goo.gl/BhBZYCV5KAy9TYZR9">Marthandam</option>
+            <option value="Thiruvattar|9789499178|pricegroupthiruvattar@gmail.com|https://maps.app.goo.gl/mSUCEuCJBZiLdnNs5">Thiruvattar</option>
+            <option value="Verkilambi|7339070114|pricegroupverkilambi@gmail.com|https://maps.app.goo.gl/2RPPHeVhrdos336R9">Verkilambi</option>
+            <option value="Munchirai|8681980178|pricegroupmunchirai@gmail.com|https://maps.app.goo.gl/2KQErwMBbo5y8Bun8">Munchirai</option>
+            <option value="Karungal|9384170178|pricegroupkarungal@gmail.com|https://maps.app.goo.gl/HC4N2APDeN6dbyvi6">Karungal</option>
+            <option value="Palliyadi|9566909178|pricegrouppalliyadi@gmail.com|https://maps.app.goo.gl/dfdXEc1BELRS5PrQ9">Palliyadi</option>
+            <option value="Thuckalay|9489385178|pricegroupthuckalay@gmail.com|https://maps.app.goo.gl/CvsiUkL2dfe6BUB6A">Thuckalay</option>
+            <option value="Eraniel|8939980178|pricegrouperaniel@gmail.com|https://maps.app.goo.gl/7zQoXUugB6rYkkAs9">Eraniel</option>
+            <option value="Colachel|9789730012|pricegroupcolachel@gmail.com|https://maps.app.goo.gl/V3H4LukP6fgBX8ma7">Colachel</option>
+            <option value="Manavalakurichi|8220594178|pricegroupmanavalakurichi@gmail.com|https://maps.app.goo.gl/fb98irpcxnYarHc9A">Manavalakurichi</option>
+            <option value="Rajakkamangalam|8300933178|pricegrouprajakkamangalam@gmail.com|https://maps.app.goo.gl/pmxDEshZdZkwzzAYA">Rajakkamangalam</option>
+            <option value="Nagercoil|7558165718|pricegroupnagercoil@gmail.com|https://maps.app.goo.gl/AUPr3MPJ8WStNjBL7">Nagercoil</option>
+            <option value="Edalakudi|pricegroupedalakudi@gmail.com||">Edalakudi</option>
+            <option value="Kottaram|8300228412|pricegroupkottaram@gmail.com|">Kottaram</option>
+            <option value="Thovalai||pricegroupthovalai@gmail.com|">Thovalai</option>
+            <option value="Boothapandy|7448975519|pricegroupboothapandy@gmail.com|https://maps.app.goo.gl/TLDbqcZ1AbPVq81F6">Boothapandy</option>
+        </select>
+    </div>
+
+    <div class="form-row"><label>Loan Amount:</label><input type="number" id="loan" onchange="updatePreview()"></div>
+
+    <div class="form-row">
+        <label>Document Type:</label>
+        <select id="document" onchange="updatePreview()">
+            <option value="">Select Document</option>
+            <option>Loan</option>
+            <option>Sale Deed</option>
+            <option>Sale Agreement</option>
+            <option>Mortgage Deed</option>
+             <option>Simple Mortgage Deed</option>
+            <option>Settlement Deed</option>
+            <option>Gift Deed</option>
+            <option>Release Deed</option>
+            <option>Receipt</option>
+            <option>Cancellation Deed</option>
+            <option>Will Deed</option>
+            <option>Rental Agreement</option>
+            <option>Lease Deed</option>
+            <option>Power of Attorney</option>
+            <option>Adjudication</option>
+            <option>Route Pathway Deed</option>
+            <option>Partition Deed</option>
+            <option>Exchange Deed</option>
+            <option>Lease Document</option>
+            <option>Rectification Deed</option>
+            <option>Marriage Registration</option>
+            <option>Encumbrance Certificate</option>
+            <option>Promissory Note Registration</option>
+        </select>
+    </div>
+
+    <div class="form-row"><label>Mobile No:</label><input type="tel" id="mobile" onchange="updatePreview()"></div>
+
+    <div class="form-row"><label>Fees Amount:</label><input type="number" id="fees" onchange="updatePreview()"></div>
+
+    <div class="form-row"><label>Credit:</label><input type="number" id="credit" onchange="updatePreview()"></div>
+
+    <div class="form-row"><label>Message Preview:</label><textarea id="msgPreview" rows="5" readonly></textarea></div>
+
+  <div class="form-actions">
+    <button type="button" onclick="clearForm()" class="btn-clear">Clear</button>
+    <button type="button" onclick="submitForm()" class="btn-submit">Submit</button>
+</div>
+</div>
+
+
+<script>
+
+const documentTamilMap = {
+    "Loan": "கடன்",
+    "Sale Deed": "கிரய ஆவணம்",
+    "Sale Agreement": "கிரய ஒப்பந்த ஆவணம்  ",
+    "Mortgage Deed": "அடமான கடன் ஆவணம் ",
+    "Simple Mortgage Deed": " ஸ்வாதித்தனத்துடன் கூடிய அடமானப் பத்திரம்",
+    "Settlement Deed": "செட்டில்மெண்ட் ஆவணம்",
+    "Gift Deed": "தான பத்திரம்",
+    "Release Deed": "விடுதலை பத்திரம்",
+    "Receipt": "ரசீது ஆவணம்",
+    "Cancellation Deed": "ரத்து ஆவணம்",
+    "Will Deed": "உயில் ஆவணம்",
+    "Rental Agreement": "வாடகை ஒப்பந்த பத்திரம்",
+    "Lease Deed": "குத்தகை பத்திரம்",
+    "Power of Attorney": "பொது அதிகார ஆவணம்",
+    "Adjudication": "ஆவண மதிப்பீடு ஆவணம்",
+    "Route Pathway Deed": "பாதை உடன்படிக்கை ஆவணம் ",
+    "Partition Deed": "பாகப்பிரிவினை ஆவணம்",
+    "Exchange Deed": "பரிவர்த்தனை ஆவணம்",
+    "Lease Document": "குத்தகை ஆவணம்",
+    "Rectification Deed": "பிழைத்திருத்த ஆவணம்",
+    "Marriage Registration": "திருமணப் பதிவு ஆவணம்",
+    "Promissory Note Registration": "வாக்குறுதி நோட் பதிவு ஆவணம்"
+};
+
+const branchTamilMap = {
+    "Kollemcode": "கொல்லங்கோடு",
+    "Palugal": "பழுகல்",
+    "Arumanai": "அருமனை",
+    "Marthandam": "மார்த்தாண்டம்",
+    "Thiruvattar": "திருவட்டார்",
+    "Verkilambi": "வேர்கிளம்பி",
+    "Munchirai": "முஞ்சிறை",
+    "Karungal": "கருங்கல்",
+    "Palliyadi": "பள்ளியாடி",
+    "Thuckalay": "தக்கலை",
+    "Eraniel": "இரணியல்",
+    "Colachel": "குளச்சல்",
+    "Manavalakurichi": "மணவாளக்குறிச்சி",
+    "Rajakkamangalam": "ராஜாக்கமங்கலம்",
+    "Nagercoil": "நாகர்கோவில்",
+    "Edalakudi": "எடலக்குடி",
+    "Kottaram": "கொட்டாரம்",
+    "Thovalai": "தோவாளை",
+    "Boothapandy": "பூதப்பாண்டி"
+};
+
+
+    function clearForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("nameTamil").value = "";
+    document.getElementById("branch").value = "";
+    document.getElementById("loan").value = "";
+    document.getElementById("document").value = "";
+    document.getElementById("mobile").value = "";
+    document.getElementById("fees").value = "";
+    document.getElementById("credit").value = "";
+    document.getElementById("msgPreview").value = "";
+}
+
+function updatePreview() {
+    const name = document.getElementById("name").value.trim();
+    const documentType = document.getElementById("document").value;
+    const fees = document.getElementById("fees").value.trim();
+    const branchValue = document.getElementById("branch").value;
+
+    if (!branchValue) {
+        document.getElementById("msgPreview").value = "";
+        return;
+    }
+
+    const parts = branchValue.split("|");
+    const branchName = parts[0];
+    const branchPhone = parts[1];
+
+    const previewMsg = `Hello ${name},
+Your ${documentType || "Loan"} document received.
+Branch: ${branchName}
+Fees: Rs.${fees}
+Phone: ${branchPhone}`;
+
+    document.getElementById("msgPreview").value = previewMsg;
+}
+
+function submitForm() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    const name = document.getElementById("name").value.trim();
+    const nameTamil = document.getElementById("nameTamil").value.trim() || name;
+    const branchValue = document.getElementById("branch").value;
+    const loan = document.getElementById("loan").value.trim();
+    const documentType = document.getElementById("document").value;
+    const mobile = document.getElementById("mobile").value.trim();
+    const fees = document.getElementById("fees").value.trim();
+    const credit = document.getElementById("credit").value.trim();
+
+    if (!name || !mobile || !loan || !branchValue) {
+        alert("Name, Mobile, Loan & Branch required");
+        return;
+    }
+
+    if (!/^\d{10}$/.test(mobile)) {
+        alert("Enter valid 10 digit mobile number");
+        return;
+    }
+
+    const parts = branchValue.split("|");
+    const branchName = parts[0];
+    const branchPhone = parts[1];
+    const branchEmail = parts[2];
+    const branchMap = parts[3];
+
+    const documentTamil = documentTamilMap[documentType] || documentType;
+    const branchTamil = branchTamilMap[branchName] || branchName;
+
+    const smsTamil = `வணக்கம் ${nameTamil},
+உங்கள் ${documentTamil} வெற்றிகரமாக பதிவிற்கு ஏற்றுக்கொள்ளப்பட்டுள்ளது.
+கட்டணம்: ரூ.${fees}
+எங்கள் குழு விரைவில் உங்களை தொடர்பு கொள்ளும்.
+நன்றி.`;
+
+    fetch("/send-sms/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
+        body: JSON.stringify({
+            mobile: mobile,
+            loan: loan,
+            credit: credit,
+            sms_tamil: smsTamil,
+            template_variables: [
+                nameTamil,
+                name,
+                documentType,
+                branchName,
+                fees,
+                branchPhone,
+                branchEmail,
+                branchMap
+            ]
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("SMS & WhatsApp Sent Successfully!");
+            clearForm();
+        } else {
+            alert("Failed: " + data.error);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Server error");
+    });
+}
+
+</script>
+</body>
+</html>

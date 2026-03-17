@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg, #006400, #00FF00); /* deep green to bright green gradient */
+}
+
+.login-container{
+    width:400px;
+    padding:50px 35px;
+    border-radius:16px;
+    background: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align:center;
+    color: #000; /* black text inside white container */
+}
+
+.logo{
+    font-size:40px;
+    margin-bottom:15px;
+    color: #006400; /* dark green logo */
+}
+
+.title{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:5px;
+    color: #006400; /* dark green title */
+}
+
+.subtitle{
+    font-size:14px;
+    opacity:0.8;
+    margin-bottom:30px;
+    color: #333; /* dark grey subtitle */
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:8px;
+    border:1px solid #00FF7F; /* green border for inputs */
+    outline:none;
+    background: #fff; /* solid white input */
+    color: #000; /* black text for readability */
+    font-size:15px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+input::placeholder{
+    color: #888; /* grey placeholder */
+}
+
+input:focus{
+    border-color: #32CD32; /* bright green border on focus */
+    box-shadow: 0 0 5px rgba(50,205,50,0.5);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#32CD32; /* bright green button */
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#228B22; /* darker green hover */
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+.error{
+    color:#FF6347; /* bright red for errors */
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.back-link{
+    display:block;
+    margin-top:15px;
+    font-size:13px;
+    color: #006400;
+    text-decoration: none;
+}
+
+.back-link:hover{
+    color:#32CD32; /* bright green hover */
+    text-decoration: underline;
+}
+
+.footer{
+    margin-top:25px;
+    font-size:12px;
+    color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<div class="logo">🛡️</div>
+
+<div class="title">Admin Login</div>
+<div class="subtitle">Secure Access Portal</div>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="input-group">
+<input type="text" name="username" placeholder="Username" required>
+</div>
+
+<div class="input-group">
+<input type="password" name="password" placeholder="Password" required>
+</div>
+
+<button type="submit">Login</button>
+<a href="/" class="back-link">← Back to Home</a>
+
+</form>
+
+<div class="footer">
+Authorized Access Only
+</div>
+
+</div>
+
+</body>
+</html>
